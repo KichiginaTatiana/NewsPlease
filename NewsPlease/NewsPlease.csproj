@@ -6,6 +6,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="HtmlAgilityPack" Version="1.11.33" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Update="DefaultConfigs\afp\config.cfg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

@@ -1,6 +1,6 @@
 ﻿using System;
-using System.IO;
 using System.Linq;
+using NewsPlease.LinkFinders;
 
 namespace NewsPlease
 {
@@ -8,9 +8,14 @@ namespace NewsPlease
     {
         static void Main(string[] args)
         {
-            var configPaths = new ConfigCreator().Create().ToArray();
-            foreach (var configPath in configPaths)
-                System.Diagnostics.Process.Start("CMD.exe", $"/c news-please -c {configPath}");
+            var links = new DailySabahLinkFinder().GetLinks()
+                .Concat(new HurriyetDailyNewsLinkFinder().GetLinks())
+                .Concat(new SanaLinkFinder().GetLinks())
+                .Concat(new SyriahrLinkFinder().GetLinks())
+                .ToArray();
+            foreach (var link in links) 
+                Console.WriteLine(link);
+            Console.WriteLine(links.Length);
         }
     }
 }
