@@ -7,56 +7,66 @@ namespace NewsPlease
 {
     public class ConfigCreator
     {
-        private static readonly string[] ConfigNames =
+        private static readonly string[] ConfigDirectories =
         {
-            "apfConfig.cfg",
-            "apTassDailysabahHurriyetConfig.cfg",
-            "reutersConfig.cfg",
-            "sanaSyriahrConfig.cfg"
+            "afp",
+            "apTassDailysabahHurriyet",
+            "reuters",
+            "sanaSyriahr"
         };
 
-        private static readonly string[] SiteLists =
-        {
-            "apfSitelist.hjson",
-            "apTassDailysabahHurriyetSitelist.hjson",
-            "reutersSitelist.hjson",
-            "sanaSyriahrSitelist.hjson"
-        };
+        private const string SiteListFileName = "sitelist.hjson";
+        private const string ConfigFileName = "config.cfg";
 
         public IEnumerable<string> Create()
         {
             var directory = Directory.GetCurrentDirectory();
-            Directory.CreateDirectory(Path.Combine(directory, "Configs"));
-            foreach (var siteList in SiteLists)
+            var allConfigDirectory = Path.Combine(directory, "Configs");
+            try
             {
-                var path = Path.Combine(directory, "DefaultConfigs", siteList);
-                var newPath = Path.Combine(directory, "Configs", siteList);
-                File.Copy(path, newPath);
+                Directory.Delete(allConfigDirectory, true);
             }
+            catch (Exception) { }
 
-            foreach (var configName in ConfigNames)
+            Directory.CreateDirectory(allConfigDirectory);
+
+            foreach (var configDirectory in ConfigDirectories)
             {
-                var path = Path.Combine(directory, "DefaultConfigs", configName);
-                var allLines = File.ReadAllLines(path).Select(x =>
-                {
-                    if (x.StartsWith("start_date"))
-                        return $"start_date = '{DateTime.Today:yyyy-MM-dd HH:mm:ss}'";
-
-                    if (x.StartsWith("end_date"))
-                        return $"end_date = '{DateTime.Today.AddDays(1):yyyy-MM-dd HH:mm:ss}'";
-
-                    if (x.StartsWith("local_data_directory"))
-                        return "local_data_directory = " +
-                               Path.Combine(directory, "Data").Replace("\\", "/") +
-                               "/%appendmd5_full_domain(32)/%appendmd5_url_directory_string(60)_%appendmd5_max_url_file_name_%timestamp_download.html";
-
-                    return x;
-                });
-
-                var newPath = Path.Combine(directory, "Configs", configName);
-                File.WriteAllLines(newPath, allLines);
-                yield return path;
+                Directory.CreateDirectory(Path.Combine(directory, "Configs", configDirectory));
+                CopySiteListFile(directory, configDirectory);
+                CopyConfigFile(directory, configDirectory);
+                yield return Path.Combine(directory, "Configs", configDirectory);
             }
+        }
+
+        private static void CopyConfigFile(string directory, string configDirectory)
+        {
+            var path = Path.Combine(directory, "DefaultConfigs", configDirectory, ConfigFileName);
+            var allLines = File.ReadAllLines(path).Select(x =>
+            {
+                if (x.StartsWith("start_date"))
+                    return $"start_date = '{DateTime.Today:yyyy-MM-dd HH:mm:ss}'";
+
+                if (x.StartsWith("end_date"))
+                    return $"end_date = '{DateTime.Today.AddDays(1):yyyy-MM-dd HH:mm:ss}'";
+
+                if (x.StartsWith("local_data_directory"))
+                    return "local_data_directory = " +
+                           Path.Combine(directory, "Data").Replace("\\", "/") +
+                           "/%appendmd5_full_domain(32)/%appendmd5_url_directory_string(60)_%appendmd5_max_url_file_name_%timestamp_download.html";
+
+                return x;
+            });
+
+            var newPath = Path.Combine(directory, "Configs", configDirectory, ConfigFileName);
+            File.WriteAllLines(newPath, allLines);
+        }
+
+        private static void CopySiteListFile(string directory, string configDirectory)
+        {
+            var path = Path.Combine(directory, "DefaultConfigs", configDirectory, SiteListFileName);
+            var newPath = Path.Combine(directory, "Configs", configDirectory, SiteListFileName);
+            File.Copy(path, newPath);
         }
     }
 }

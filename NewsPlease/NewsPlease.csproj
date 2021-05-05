@@ -6,17 +6,23 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Update="DefaultConfigs\afp\config.cfg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="DefaultConfigs\afp\sitelist.hjson">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="DefaultConfigs\apfConfig.cfg">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="DefaultConfigs\apfSitelist.hjson">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="DefaultConfigs\apTassDaylysabahHurriyetConfig.cfg">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    <None Update="DefaultConfigs\apTassDailysabahHurriyet\config.cfg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="DefaultConfigs\apTassDaylysabahHurriyetSitelist.hjson">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    <None Update="DefaultConfigs\apTassDailysabahHurriyet\sitelist.hjson">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="DefaultConfigs\reutersConfig.cfg">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -24,11 +30,23 @@
     <None Update="DefaultConfigs\reutersSitelist.hjson">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Update="DefaultConfigs\reuters\config.cfg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="DefaultConfigs\reuters\sitelist.hjson">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="DefaultConfigs\sanaSyriahrConfig.cfg">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="DefaultConfigs\sanaSyriahrSitelist.hjson">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="DefaultConfigs\sanaSyriahr\config.cfg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="DefaultConfigs\sanaSyriahr\sitelist.hjson">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>
 
