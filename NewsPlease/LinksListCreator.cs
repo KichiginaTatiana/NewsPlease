@@ -4,7 +4,7 @@ using NewsPlease.LinkFinders;
 
 namespace NewsPlease
 {
-    public class SiteListCreator
+    public class LinksListCreator
     {
         private readonly DailySabahLinkFinder dailySabahLinkFinder;
         private readonly HurriyetDailyNewsLinkFinder hurriyetDailyNewsLinkFinder;
@@ -12,7 +12,7 @@ namespace NewsPlease
         private readonly SyriahrLinkFinder syriahrLinkFinder;
         private readonly TassLinkFinder tassLinkFinder;
 
-        public SiteListCreator()
+        public LinksListCreator()
         {
             dailySabahLinkFinder = new DailySabahLinkFinder();
             hurriyetDailyNewsLinkFinder = new HurriyetDailyNewsLinkFinder();
@@ -28,8 +28,9 @@ namespace NewsPlease
                 .Concat(sanaLinkFinder.GetLinks())
                 .Concat(syriahrLinkFinder.GetLinks())
                 .Concat(tassLinkFinder.GetLinks())
+                .Distinct()
                 .ToArray();
-            File.WriteAllText("SiteList.txt", string.Join("\n", links));
+            File.WriteAllText("LinksList.txt", string.Join("\n", links));
             return links.Length;
         }
     }

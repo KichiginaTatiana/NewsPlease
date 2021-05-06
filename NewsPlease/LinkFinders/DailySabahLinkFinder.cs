@@ -24,7 +24,7 @@ namespace NewsPlease.LinkFinders
                 var pageLinks = GetLinksFromPage(url).Where(x => Regex.IsMatch(x));
                 links.AddRange(pageLinks);
             }
-            return links.Distinct();
+            return links;
         }
     }
 }

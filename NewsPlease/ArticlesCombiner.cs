@@ -12,6 +12,7 @@ namespace NewsPlease
         {
             articlesProvider = new ArticlesProvider();
         }
+
         public void Combine()
         {
             var articles = articlesProvider.Get().ToArray();

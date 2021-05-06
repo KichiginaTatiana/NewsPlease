@@ -3,7 +3,7 @@ import os
 import sys
 from newsplease import NewsPlease
 
-name = 'SiteList.txt'
+name = 'LinkList.txt'
 basepath = sys.argv[1]
 
 download_dir = basepath + 'Data' + '/'

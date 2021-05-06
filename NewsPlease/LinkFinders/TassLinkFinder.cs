@@ -39,16 +39,14 @@ namespace NewsPlease.LinkFinders
         public IEnumerable<string> GetLinks()
         {
             foreach (var query in Queries)
+            foreach (var articleMeta in MakeRequest(query).Result)
             {
-                foreach (var articleMeta in MakeRequest(query).Result)
-                {
-                    if (DateTimeOffset.FromUnixTimeSeconds(articleMeta.Date) < DateTimeOffset.Now.Date)
-                        continue;
+                if (DateTimeOffset.FromUnixTimeSeconds(articleMeta.Date) < DateTimeOffset.Now.Date)
+                    continue;
 
-                    yield return articleMeta.Link.StartsWith("/")
-                        ? Url + articleMeta.Link
-                        : Url + "/" + articleMeta.Link;
-                }
+                yield return articleMeta.Link.StartsWith("/")
+                    ? Url + articleMeta.Link
+                    : Url + "/" + articleMeta.Link;
             }
         }
 

@@ -27,7 +27,7 @@ namespace NewsPlease.LinkFinders
                 links.AddRange(pageLinks);
             }
 
-            return links.Distinct();
+            return links;
         }
     }
 }
