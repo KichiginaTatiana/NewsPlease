@@ -11,7 +11,7 @@ namespace NewsPlease
             Console.WriteLine($"Site list has been created. Found {articlesCount} articles");
             new ArticleDownloader().Download();
             Console.WriteLine("Articles have been downloaded");
-            new ArticlesProcessor().Process();
+            new ArticlesCombiner().Combine();
         }
     }
 }
