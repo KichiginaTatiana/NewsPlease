@@ -1,8 +1,6 @@
 ﻿using System.IO;
 using System.Linq;
 using NewsPlease.LinkFinders;
-using NewsPlease.Models;
-using Newtonsoft.Json;
 
 namespace NewsPlease
 {
@@ -21,18 +19,15 @@ namespace NewsPlease
             syriahrLinkFinder = new SyriahrLinkFinder();
         }
 
-        public void Create()
+        public int Create()
         {
             var links = dailySabahLinkFinder.GetLinks()
                 .Concat(hurriyetDailyNewsLinkFinder.GetLinks())
                 .Concat(sanaLinkFinder.GetLinks())
                 .Concat(syriahrLinkFinder.GetLinks())
                 .ToArray();
-            var siteList = new SiteList
-            {
-                BaseUrls = links.Select(x => new BaseUrl {Url = x}).ToArray()
-            };
-            File.WriteAllText("sitelist.hjson", JsonConvert.SerializeObject(siteList, Formatting.Indented));
+            File.WriteAllText("SiteList.txt", string.Join("\n", links));
+            return links.Length;
         }
     }
 }

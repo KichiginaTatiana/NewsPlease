@@ -11,7 +11,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Update="config.cfg">
+    <ProjectReference Include="..\NewsPlease.Models\NewsPlease.Models.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="news-please.py">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>
