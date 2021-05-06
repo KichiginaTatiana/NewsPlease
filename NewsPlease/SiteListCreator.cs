@@ -10,6 +10,7 @@ namespace NewsPlease
         private readonly HurriyetDailyNewsLinkFinder hurriyetDailyNewsLinkFinder;
         private readonly SanaLinkFinder sanaLinkFinder;
         private readonly SyriahrLinkFinder syriahrLinkFinder;
+        private readonly TassLinkFinder tassLinkFinder;
 
         public SiteListCreator()
         {
@@ -17,6 +18,7 @@ namespace NewsPlease
             hurriyetDailyNewsLinkFinder = new HurriyetDailyNewsLinkFinder();
             sanaLinkFinder = new SanaLinkFinder();
             syriahrLinkFinder = new SyriahrLinkFinder();
+            tassLinkFinder = new TassLinkFinder();
         }
 
         public int Create()
@@ -25,6 +27,7 @@ namespace NewsPlease
                 .Concat(hurriyetDailyNewsLinkFinder.GetLinks())
                 .Concat(sanaLinkFinder.GetLinks())
                 .Concat(syriahrLinkFinder.GetLinks())
+                .Concat(tassLinkFinder.GetLinks())
                 .ToArray();
             File.WriteAllText("SiteList.txt", string.Join("\n", links));
             return links.Length;

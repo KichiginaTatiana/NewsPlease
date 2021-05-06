@@ -4,7 +4,7 @@ using System.Text.RegularExpressions;
 
 namespace NewsPlease.LinkFinders
 {
-    public class HurriyetDailyNewsLinkFinder : LinkFinderBase
+    public class HurriyetDailyNewsLinkFinder : LinkFinderBase, ILinkFinder
     {
         private static readonly Regex Regex = new Regex("^/.+[0-9]+", RegexOptions.Compiled);
         private const string Url = "https://www.hurriyetdailynews.com";
@@ -16,7 +16,7 @@ namespace NewsPlease.LinkFinders
             "https://www.hurriyetdailynews.com/search/turkish"
         };
 
-        public List<string> GetLinks()
+        public IEnumerable<string> GetLinks()
         {
             var links = new List<string>();
             foreach (var searchUrl in SearchUrls)
@@ -27,7 +27,7 @@ namespace NewsPlease.LinkFinders
                 links.AddRange(pageLinks);
             }
 
-            return links.Distinct().ToList();
+            return links.Distinct();
         }
     }
 }

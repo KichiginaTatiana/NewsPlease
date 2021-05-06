@@ -4,7 +4,7 @@ using System.Text.RegularExpressions;
 
 namespace NewsPlease.LinkFinders
 {
-    public class DailySabahLinkFinder : LinkFinderBase
+    public class DailySabahLinkFinder : LinkFinderBase, ILinkFinder
     {
         private static readonly string Pattern = Regex.Escape("https://www.dailysabah.com/") + ".+/.+";
         private static readonly Regex Regex = new Regex(Pattern, RegexOptions.Compiled);
@@ -16,7 +16,7 @@ namespace NewsPlease.LinkFinders
             "https://www.dailysabah.com/search?query=turkish"
         };
 
-        public List<string> GetLinks()
+        public IEnumerable<string> GetLinks()
         {
             var links = new List<string>();
             foreach (var url in Urls)
@@ -24,7 +24,7 @@ namespace NewsPlease.LinkFinders
                 var pageLinks = GetLinksFromPage(url).Where(x => Regex.IsMatch(x));
                 links.AddRange(pageLinks);
             }
-            return links.Distinct().ToList();
+            return links.Distinct();
         }
     }
 }
