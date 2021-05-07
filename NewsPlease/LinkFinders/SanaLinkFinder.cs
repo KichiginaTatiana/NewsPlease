@@ -4,7 +4,7 @@ using System.Text.RegularExpressions;
 
 namespace NewsPlease.LinkFinders
 {
-    public class SanaLinkFinder : LinkFinderBase, ILinkFinder
+    public class SanaLinkFinder : HtmlLinkFinderBase, ILinkFinder
     {
         private static readonly Regex Regex = new Regex(Regex.Escape("https://sana.sy/en/?p="), RegexOptions.Compiled);
 

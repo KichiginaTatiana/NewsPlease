@@ -22,6 +22,10 @@ namespace NewsPlease
                     };
                 })
                 .Where(x => !x.isParsed || x.publishDate >= DateTime.Today)
+                .Where(x => !x.article.SourceDomain.Contains("reuters") ||
+                            x.article.Maintext.Contains("syria", StringComparison.InvariantCultureIgnoreCase) ||
+                            x.article.Maintext.Contains("turkey", StringComparison.InvariantCultureIgnoreCase) ||
+                            x.article.Maintext.Contains("turkish", StringComparison.InvariantCultureIgnoreCase))
                 .Select(x => x.article);
 
         private static IEnumerable<NewsArticle> ReadArticles()

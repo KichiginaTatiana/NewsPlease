@@ -6,13 +6,13 @@ using HtmlAgilityPack;
 
 namespace NewsPlease.LinkFinders
 {
-    public abstract class LinkFinderBase
+    public abstract class HtmlLinkFinderBase
     {
         protected static IEnumerable<string> GetLinksFromPage(string url)
         {
             var doc = LoadWithRetry(url);
             return doc.DocumentNode.SelectNodes("//a[@href]")
-                .Select(x => x.Attributes.FirstOrDefault(a => a.Name == "href")?.Value)
+                .Select(x => x.Attributes?.FirstOrDefault(a => a.Name == "href")?.Value)
                 .Where(x => !string.IsNullOrEmpty(x))
                 .Distinct();
         }

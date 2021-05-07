@@ -4,7 +4,7 @@ using System.Text.RegularExpressions;
 
 namespace NewsPlease.LinkFinders
 {
-    public class SyriahrLinkFinder : LinkFinderBase, ILinkFinder
+    public class SyriahrLinkFinder : HtmlLinkFinderBase, ILinkFinder
     {
         private static readonly string Pattern = Regex.Escape("https://www.syriahr.com/en/") + "[0-9]+";
         private static readonly Regex Regex = new Regex(Pattern, RegexOptions.Compiled);

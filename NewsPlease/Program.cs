@@ -8,7 +8,7 @@ namespace NewsPlease
         {
             Console.WriteLine("Started");
             var articlesCount = new LinksListCreator().Create();
-            Console.WriteLine($"Site list has been created. Found {articlesCount} articles");
+            Console.WriteLine($"Links list has been created. Found {articlesCount} articles");
             new ArticleDownloader().Download();
             Console.WriteLine("Articles have been downloaded");
             new ArticlesCombiner().Combine();

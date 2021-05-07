@@ -50,7 +50,7 @@ namespace NewsPlease.LinkFinders
             }
         }
 
-        public async Task<ArticleMeta[]> MakeRequest(string query)
+        private async Task<ArticleMeta[]> MakeRequest(string query)
         {
             var request = new Request(
                     RequestMethods.Post,

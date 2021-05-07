@@ -4,7 +4,7 @@ using System.Text.RegularExpressions;
 
 namespace NewsPlease.LinkFinders
 {
-    public class DailySabahLinkFinder : LinkFinderBase, ILinkFinder
+    public class DailySabahLinkFinder : HtmlLinkFinderBase, ILinkFinder
     {
         private static readonly string Pattern = Regex.Escape("https://www.dailysabah.com/") + ".+/.+";
         private static readonly Regex Regex = new Regex(Pattern, RegexOptions.Compiled);
