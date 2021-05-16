@@ -11,6 +11,8 @@ namespace NewsPlease
         private readonly SanaLinkFinder sanaLinkFinder;
         private readonly SyriahrLinkFinder syriahrLinkFinder;
         private readonly TassLinkFinder tassLinkFinder;
+        private readonly ReutersLinkFinder reutersLinkFinder;
+        private readonly ApNewsLinkFinder apNewsLinkFinder;
 
         public LinksListCreator()
         {
@@ -19,6 +21,8 @@ namespace NewsPlease
             sanaLinkFinder = new SanaLinkFinder();
             syriahrLinkFinder = new SyriahrLinkFinder();
             tassLinkFinder = new TassLinkFinder();
+            reutersLinkFinder = new ReutersLinkFinder();
+            apNewsLinkFinder = new ApNewsLinkFinder();
         }
 
         public int Create()
@@ -28,6 +32,8 @@ namespace NewsPlease
                 .Concat(sanaLinkFinder.GetLinks())
                 .Concat(syriahrLinkFinder.GetLinks())
                 .Concat(tassLinkFinder.GetLinks())
+                .Concat(reutersLinkFinder.GetLinks())
+                .Concat(apNewsLinkFinder.GetLinks())
                 .Distinct()
                 .ToArray();
             File.WriteAllText("LinksList.txt", string.Join("\n", links));
